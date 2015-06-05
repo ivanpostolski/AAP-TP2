@@ -1,0 +1,12 @@
+/home/ivan/Documents/cetis/AAP-TP2/dafny_de6989227c14/Source/Dafny/obj/Debug/.NETFramework,Version=v4.0,Profile=Client.AssemblyAttribute.cs
+/home/ivan/Documents/cetis/AAP-TP2/dafny_de6989227c14/Source/Dafny/bin/Debug/DafnyPipeline.dll.mdb
+/home/ivan/Documents/cetis/AAP-TP2/dafny_de6989227c14/Source/Dafny/bin/Debug/DafnyPipeline.dll
+/home/ivan/Documents/cetis/AAP-TP2/dafny_de6989227c14/Source/Dafny/obj/Debug/DafnyPipeline.dll
+/home/ivan/Documents/cetis/AAP-TP2/dafny_de6989227c14/Source/Dafny/obj/Debug/DafnyPipeline.dll.mdb
+/home/ivan/Documents/cetis/AAP-TP2/dafny_de6989227c14/Source/Dafny/bin/Debug/Basetypes.dll
+/home/ivan/Documents/cetis/AAP-TP2/dafny_de6989227c14/Source/Dafny/bin/Debug/Core.dll
+/home/ivan/Documents/cetis/AAP-TP2/dafny_de6989227c14/Source/Dafny/bin/Debug/ParserHelper.dll
+/home/ivan/Documents/cetis/AAP-TP2/dafny_de6989227c14/Source/Dafny/bin/Debug/CodeContractsExtender.dll
+/home/ivan/Documents/cetis/AAP-TP2/dafny_de6989227c14/Source/Dafny/bin/Debug/CodeContractsExtender.dll.mdb
+/home/ivan/Documents/cetis/AAP-TP2/dafny_de6989227c14/Source/Dafny/bin/Debug/Graph.dll
+/home/ivan/Documents/cetis/AAP-TP2/dafny_de6989227c14/Source/Dafny/bin/Debug/Graph.dll.mdb

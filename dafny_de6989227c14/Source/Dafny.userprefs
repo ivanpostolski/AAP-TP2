@@ -1,0 +1,38 @@
+﻿<Properties StartupItem="DafnyDriver/DafnyDriver.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|.NET" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="DafnyDriver/DafnyDriver.cs">
+    <Files>
+      <File FileName="Dafny/Parser.cs" Line="1" Column="1" />
+      <File FileName="Dafny/DafnyMain.cs" Line="17" Column="1" />
+      <File FileName="Dafny/Dafny.atg" Line="1" Column="1" />
+      <File FileName="Dafny/DafnyAst.cs" Line="1" Column="1" />
+      <File FileName="Dafny/Translator.cs" Line="5054" Column="1" />
+      <File FileName="Dafny/Util.cs" Line="9" Column="1" />
+      <File FileName="DafnyDriver/DafnyDriver.cs" Line="31" Column="24" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/home/ivan/Documents/cetis/AAP-TP2/dafny_de6989227c14/Source/DafnyDriver/DafnyDriver.cs" line="29" column="1" />
+      <Breakpoint file="/home/ivan/Documents/cetis/AAP-TP2/dafny_de6989227c14/Source/Dafny/Translator.cs" line="5054" column="1" />
+      <Breakpoint file="/home/ivan/Documents/cetis/AAP-TP2/dafny_de6989227c14/Source/Dafny/Translator.cs" line="5028" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.DafnyDriver>
+    <MonoDevelop.Ide.CustomExecutionModes>
+      <Data Name="Debug Piola" Id="9acbbb40-7b1a-450e-acac-30a64a40b186" ModeId="Mono 4.0.1">
+        <CommandData>
+          <Item Key="MonoDevelop.Ide.Execution.CustomArgsCustomizer">
+            <Value Arguments="/home/ivan/Documents/cetis/AAP-TP2/instances/instances/div.dfy" ctype="CustomArgsExecutionModeData">
+              <EnvironmentVariables />
+            </Value>
+          </Item>
+          <Item Key="MonoDevelop.Ide.Execution.MonoExecutionCustomizer">
+            <Value DebugMode="True" DebugCasts="True" DebugMdbOptimizations="True" GdbInfo="True" XDebug="True" ctype="MonoExecutionParameters" />
+          </Item>
+        </CommandData>
+      </Data>
+    </MonoDevelop.Ide.CustomExecutionModes>
+  </MonoDevelop.Ide.ItemProperties.DafnyDriver>
+</Properties>

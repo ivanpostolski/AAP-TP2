@@ -1,0 +1,6 @@
+/home/ivan/Documents/cetis/AAP-TP2/dafny_de6989227c14/Source/DafnyDriver/obj/Debug/.NETFramework,Version=v4.0.AssemblyAttribute.cs
+/home/ivan/Documents/cetis/AAP-TP2/dafny_de6989227c14/Binaries/Dafny.exe.config
+/home/ivan/Documents/cetis/AAP-TP2/dafny_de6989227c14/Binaries/Dafny.exe.mdb
+/home/ivan/Documents/cetis/AAP-TP2/dafny_de6989227c14/Binaries/Dafny.exe
+/home/ivan/Documents/cetis/AAP-TP2/dafny_de6989227c14/Source/DafnyDriver/obj/Debug/Dafny.exe
+/home/ivan/Documents/cetis/AAP-TP2/dafny_de6989227c14/Source/DafnyDriver/obj/Debug/Dafny.exe.mdb
