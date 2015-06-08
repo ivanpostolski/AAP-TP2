@@ -2755,6 +2755,7 @@ namespace Microsoft.Dafny {
             foreach (var inFormal in m.Ins) {
               var dt = inFormal.Type.AsDatatype;
               if (dt != null) {
+								
                 var funcID = new Bpl.FunctionCall(new Bpl.IdentifierExpr(inFormal.tok, "$IsA#" + dt.FullSanitizedName, Bpl.Type.Bool));
                 var f = new Bpl.IdentifierExpr(inFormal.tok, inFormal.AssignUniqueName(m.IdGenerator), TrType(inFormal.Type));
                 builder.Add(new Bpl.AssumeCmd(inFormal.tok, new Bpl.NAryExpr(inFormal.tok, funcID, new List<Bpl.Expr> { f })));
@@ -2863,7 +2864,7 @@ namespace Microsoft.Dafny {
         foreach (MaybeFreeExpression p in m.Req) {
           CheckWellformed(p.E, new WFOptions(), localVariables, builder, etran);
           builder.Add(new Bpl.AssumeCmd(p.E.tok, etran.TrExpr(p.E)));
-        }
+        }		
         // check well-formedness of the modifies clause
         CheckFrameWellFormed(new WFOptions(), m.Mod.Expressions, localVariables, builder, etran);
         // check well-formedness of the decreases clauses
@@ -5026,6 +5027,8 @@ namespace Microsoft.Dafny {
           CheckResultToBeInType(expr.tok, ee.E, ee.ToType, locals, builder, etran);
         }
       } else if (expr is BinaryExpr) {
+		Expr cotasuperior = Bpl.Expr.Literal (2147483647);
+		Expr cotainferior = Bpl.Expr.Literal (-2147483648);
         BinaryExpr e = (BinaryExpr)expr;
         CheckWellformed(e.E0, options, locals, builder, etran);
         switch (e.ResolvedOp) {
@@ -5044,17 +5047,31 @@ namespace Microsoft.Dafny {
             break;
 				case BinaryExpr.ResolvedOpcode.Add:
 					CheckWellformed (e.E1, options, locals, builder, etran);
-					Expr comelaBoogieSuperior = Bpl.Expr.Literal (2147483647);
+
 					Expr lasuma = Bpl.Expr.Add (etran.TrExpr (e.E0), etran.TrExpr (e.E1));
-					builder.Add (Assert (expr.tok, Bpl.Expr.Le (lasuma, comelaBoogieSuperior), "posible overflow superior"));
-					Expr comelaBoogieInferior = Bpl.Expr.Literal (-2147483648);
-					builder.Add (Assert (expr.tok, Bpl.Expr.Ge (lasuma, comelaBoogieInferior), "posible overflow inferior"));
+					builder.Add (Assert (expr.tok, Bpl.Expr.Le (lasuma, cotasuperior), "posible overflow superior"));
+					builder.Add (Assert (expr.tok, Bpl.Expr.Ge (lasuma, cotainferior), "posible overflow inferior"));
+
 
 					CheckResultToBeInType(expr.tok, expr, expr.Type, locals, builder, etran);
 			break;
           case BinaryExpr.ResolvedOpcode.Sub:
+					CheckWellformed (e.E1, options, locals, builder, etran);
+
+					Expr laresta = Bpl.Expr.Sub (etran.TrExpr (e.E0), etran.TrExpr (e.E1));
+					builder.Add (Assert (expr.tok, Bpl.Expr.Le (laresta, cotasuperior), "posible overflow superior"));
+					builder.Add (Assert (expr.tok, Bpl.Expr.Ge (laresta, cotainferior), "posible overflow inferior"));
+
+					CheckResultToBeInType(expr.tok, expr, expr.Type, locals, builder, etran);
+					break;
+					
           case BinaryExpr.ResolvedOpcode.Mul:
             CheckWellformed(e.E1, options, locals, builder, etran);
+
+			Expr lamul = Bpl.Expr.Mul (etran.TrExpr (e.E0), etran.TrExpr (e.E1));
+			builder.Add (Assert (expr.tok, Bpl.Expr.Le (lamul, cotasuperior), "posible overflow superior"));
+			builder.Add (Assert (expr.tok, Bpl.Expr.Ge (lamul, cotainferior), "posible overflow inferior"));
+
             CheckResultToBeInType(expr.tok, expr, expr.Type, locals, builder, etran);
             break;
 		  case BinaryExpr.ResolvedOpcode.Div:
@@ -6164,6 +6181,13 @@ namespace Microsoft.Dafny {
             }
           }
         }
+		//require ints in range, assumes that every parameter is an int. 
+				foreach (Bpl.Variable b in inParams) {
+					if (b.TypedIdent.Type.IsInt && kind != MethodTranslationKind.SpecWellformedness) {
+						req.Add (Requires (m.tok, false, Bpl.Expr.Le (new Bpl.IdentifierExpr (b.tok, b), Bpl.Expr.Literal (2147483647)), null, comment));
+						req.Add (Requires (m.tok, false, Bpl.Expr.Ge (new Bpl.IdentifierExpr (b.tok, b), Bpl.Expr.Literal (-2147483648)), null, comment));
+					}
+				}
         comment = "user-defined postconditions";
         foreach (var p in m.Ens) {
           ens.Add(Ensures(p.E.tok, true, CanCallAssumption(p.E, etran), null, comment));
@@ -6188,10 +6212,19 @@ namespace Microsoft.Dafny {
             }
           }
         }
+					
         foreach (BoilerplateTriple tri in GetTwoStateBoilerplate(m.tok, m.Mod.Expressions, m.IsGhost, etran.Old, etran, etran.Old)) {
           ens.Add(Ensures(tri.tok, tri.IsFree, tri.Expr, tri.ErrorMessage, tri.Comment));
         }
       }
+
+		foreach (Bpl.Variable b in outParams) {
+				if (b.TypedIdent.Type.IsInt && kind != MethodTranslationKind.SpecWellformedness) {
+				ens.Add(Ensures(m.tok,false,Bpl.Expr.Le(new Bpl.IdentifierExpr(b.tok, b),Bpl.Expr.Literal(2147483647)),null,null));
+				ens.Add(Ensures(m.tok,false,Bpl.Expr.Ge(new Bpl.IdentifierExpr(b.tok, b),Bpl.Expr.Literal(-2147483648)),null,null));
+			}
+
+		}
 
       var typeParams = TrTypeParamDecls(GetTypeParams(m));
       var name = MethodName(m, kind);
